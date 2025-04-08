@@ -1,29 +1,31 @@
 import React from "react";
 import { useState, useEffect } from "react";
 export default function App8() {
-  const [amount, setAmount] = useState([]);
-  const [value, setValue] = useState();
-  const [total, setTotal] = useState(0);
-  const handleAdd = () => {
-    setAmount([...amount, value]);
+  const [numbers, setNumbers] = useState([]);
+  const [number, setNumber] = useState();
+  const [total, setTotal] = useState();
+  const handleSubmit = () => {
+    setNumbers([...numbers, number]);
   };
   useEffect(() => {
     setTotal(
-      amount.reduce((s, value) => {
-        return s + Number(value);
+      numbers.reduce((sum, value) => {
+        return sum + Number(value);
       }, 0)
     );
-  }, [amount]);
+  }, [numbers]);
   return (
     <div>
-      <input
-        type="number"
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Enter Amount"
-      ></input>
-      <button onClick={handleAdd}>Add</button>
+      <h3>This is App8</h3>
+      <p>
+        <input
+          type="number"
+          onChange={(e) => setNumber(e.target.value)}
+        ></input>
+        <button onClick={handleSubmit}>Add</button>
+      </p>
+      {numbers && numbers.map((value) => <div>{value}</div>)}
       <hr></hr>
-      {amount && amount.map((value, index) => <div key={index}>{value}</div>)}
       Total:{total}
     </div>
   );
